@@ -15,7 +15,8 @@
                             <h6 class="card-subtitle mb-2 text-body-secondary">{{ $comic->price }}</h6>
                             <p class="card-text">{{ $comic->series }}</p>
                             <a href="{{ route('comics.show', [ 'comic' => $comic->id]) }}"><button class="btn btn-primary">Scropri di più</button></a>
-                            </div>
+                            <a href="{{ route('comics.edit', [ 'comic' => $comic->id]) }}"><button class="btn btn-primary">Modifica il fumetto</button></a>
+                        </div>
                         </div>
                     </div>
                 @endforeach

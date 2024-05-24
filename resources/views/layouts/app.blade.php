@@ -17,9 +17,20 @@
 
 <body>
 
+    <header>
+        <nav class="nav py-4 d-flex justify-content-center" >
+            <a class="nav-link icon-link icon-link-hover" style="color: black"  href="{{ route('index') }}">Home</a>
+            <a class="nav-link icon-link icon-link-hover" style="color: black"  href="{{ route('comics.index') }}">Fumetti</a>
+          </nav>
+    </header>
     <main class="bg-light">
         @yield('content')
     </main>
+    <footer class="py-4">
+        <div class="container">
+            <div class="text-center">All Rights are reserved © 2024</div>
+        </div>
+    </footer>
 
 </body>
 
