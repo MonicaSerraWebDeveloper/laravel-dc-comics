@@ -19,7 +19,6 @@ class ComicsTableSeeder extends Seeder
 
         foreach($comicsArray as $comicItem) {
             $newComic = new Comic();
-
             $newComic->title = $comicItem['title'];
             $newComic->description = $comicItem['description'];
             $newComic->thumb = 'https://picsum.photos/200/300';
