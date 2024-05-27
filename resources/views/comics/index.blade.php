@@ -16,6 +16,11 @@
                             <p class="card-text">{{ $comic->series }}</p>
                             <a href="{{ route('comics.show', [ 'comic' => $comic->id]) }}"><button class="btn btn-primary">Scropri di più</button></a>
                             <a href="{{ route('comics.edit', [ 'comic' => $comic->id]) }}"><button class="btn btn-primary">Modifica il fumetto</button></a>
+                            <form class="py-3" action="{{ route('comics.destroy', ['comic' => $comic->id]) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">Elimina</button>
+                            </form>
                         </div>
                         </div>
                     </div>
