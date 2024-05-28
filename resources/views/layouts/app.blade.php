@@ -21,7 +21,8 @@
         <nav class="nav py-4 d-flex justify-content-center" >
             <a class="nav-link icon-link icon-link-hover" style="color: black"  href="{{ route('index') }}">Home</a>
             <a class="nav-link icon-link icon-link-hover" style="color: black"  href="{{ route('comics.index') }}">Fumetti</a>
-          </nav>
+            <a class="nav-link icon-link icon-link-hover" style="color: black"  href="{{ route('comics.create') }}">Crea tu un fumetto</a>
+        </nav>
     </header>
     <main class="bg-light">
         @yield('content')
