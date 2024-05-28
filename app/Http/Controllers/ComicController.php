@@ -43,40 +43,42 @@ class ComicController extends Controller
      */
     public function store(Request $request)
     {
-        $validation = $request->validate(
-            [
-                'title' => 'required|min:5|max:100',
-                'thumb' => 'required|min:10|max:150',
-                'price' => 'required|decimal:2',
-                'series' => 'required|min:3|max:100',
-                'sale_date' => 'required|date',
-                'type' => 'required|min:3|max:50',
-                'description' => 'nullable|min:10|max:1000',
-            ],
+        // $validation = $request->validate(
+        //     [
+        //         'title' => 'required|min:5|max:100',
+        //         'thumb' => 'required|min:10|max:150',
+        //         'price' => 'required|decimal:2',
+        //         'series' => 'required|min:3|max:100',
+        //         'sale_date' => 'required|date',
+        //         'type' => 'required|min:3|max:50',
+        //         'description' => 'nullable|min:10|max:1000',
+        //     ],
 
-            [
-                'title.required' => "Il campo 'titolo' è richiesto",
-                'title.min' => "Il 'titolo' deve avere almeno 5 caratteri",
-                'title.max' => "Il 'titolo' deve avere massimo 100 caratteri",
-                'thumb.required' => "Il campo 'immagine copertina' è richiesto",
-                'thumb.min' => "Il campo 'immagine copertina' deve avere minimo 10 caratteri",
-                'thumb.max' => "Il campo 'immagine copertina' deve avere massimo 150 caratteri",
-                'price.required' => "Il campo 'prezzo' è richiesto",
-                'price.decimal' => "Il campo 'prezzo' deve avere almeno 2 decimali",
-                'series.required' => "Il campo 'serie' è richiesto",
-                'series.min' => "Il campo 'serie' deve avere minimo 3 caratteri",
-                'series.max' => "Il campo 'serie' deve avere massimo 100 caratteri",
-                'sale_date.required' => "Il campo 'data' è richiesto",
-                'sale_date.date' => "Il campo 'data' deve essere una data nel formato giorno / mese / anno",
-                'type.required' => "Il campo 'tipo' è richiesto",
-                'type.min' => "Il campo 'tipo' deve avere minimo 3 caratteri",
-                'type.max' => "Il campo 'tipo' deve avere massimo 50 caratteri",
-                'description.min' => "Il campo 'Descrizione' può rimanere vuoto o deve avere minimo 10 caratteri",
-                'description.max' => "Il campo 'Descrizione' può avere massimo 1000 caratteri",
-            ]
-        );
-
+        //     [
+        //         'title.required' => "Il campo 'titolo' è richiesto",
+        //         'title.min' => "Il 'titolo' deve avere almeno 5 caratteri",
+        //         'title.max' => "Il 'titolo' deve avere massimo 100 caratteri",
+        //         'thumb.required' => "Il campo 'immagine copertina' è richiesto",
+        //         'thumb.min' => "Il campo 'immagine copertina' deve avere minimo 10 caratteri",
+        //         'thumb.max' => "Il campo 'immagine copertina' deve avere massimo 150 caratteri",
+        //         'price.required' => "Il campo 'prezzo' è richiesto",
+        //         'price.decimal' => "Il campo 'prezzo' deve avere almeno 2 decimali",
+        //         'series.required' => "Il campo 'serie' è richiesto",
+        //         'series.min' => "Il campo 'serie' deve avere minimo 3 caratteri",
+        //         'series.max' => "Il campo 'serie' deve avere massimo 100 caratteri",
+        //         'sale_date.required' => "Il campo 'data' è richiesto",
+        //         'sale_date.date' => "Il campo 'data' deve essere una data nel formato giorno / mese / anno",
+        //         'type.required' => "Il campo 'tipo' è richiesto",
+        //         'type.min' => "Il campo 'tipo' deve avere minimo 3 caratteri",
+        //         'type.max' => "Il campo 'tipo' deve avere massimo 50 caratteri",
+        //         'description.min' => "Il campo 'Descrizione' può rimanere vuoto o deve avere minimo 10 caratteri",
+        //         'description.max' => "Il campo 'Descrizione' può avere massimo 1000 caratteri",
+        //     ]
+        // );
+        
         $formData = $request->all();
+        $this->validation($formData);
+
         $newComic = new Comic();
             // $newComic->title = $formData['title'];
             // $newComic->description = $formData['description'];
@@ -135,7 +137,67 @@ class ComicController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validation = $request->validate(
+        // $validation = $request->validate(
+        //     [
+        //         'title' => 'required|min:5|max:100',
+        //         'thumb' => 'required|min:10|max:150',
+        //         'price' => 'required|decimal:2',
+        //         'series' => 'required|min:3|max:100',
+        //         'sale_date' => 'required|date',
+        //         'type' => 'required|min:3|max:50',
+        //         'description' => 'nullable|min:10|max:1000',
+        //     ],
+
+        //     [
+        //         'title.required' => "Il campo 'titolo' è richiesto",
+        //         'title.min' => "Il 'titolo' deve avere almeno 5 caratteri",
+        //         'title.max' => "Il 'titolo' deve avere massimo 100 caratteri",
+        //         'thumb.required' => "Il campo 'immagine copertina' è richiesto",
+        //         'thumb.min' => "Il campo 'immagine copertina' deve avere minimo 10 caratteri",
+        //         'thumb.max' => "Il campo 'immagine copertina' deve avere massimo 150 caratteri",
+        //         'price.required' => "Il campo 'prezzo' è richiesto",
+        //         'price.decimal' => "Il campo 'prezzo' deve avere almeno 2 decimali",
+        //         'series.required' => "Il campo 'serie' è richiesto",
+        //         'series.min' => "Il campo 'serie' deve avere minimo 3 caratteri",
+        //         'series.max' => "Il campo 'serie' deve avere massimo 100 caratteri",
+        //         'sale_date.required' => "Il campo 'data' è richiesto",
+        //         'sale_date.date' => "Il campo 'data' deve essere una data nel formato giorno / mese / anno",
+        //         'type.required' => "Il campo 'tipo' è richiesto",
+        //         'type.min' => "Il campo 'tipo' deve avere minimo 3 caratteri",
+        //         'type.max' => "Il campo 'tipo' deve avere massimo 50 caratteri",
+        //         'description.min' => "Il campo 'Descrizione' può rimanere vuoto o deve avere minimo 10 caratteri",
+        //         'description.max' => "Il campo 'Descrizione' può avere massimo 1000 caratteri",
+        //     ]
+        // );
+
+        $comic = Comic::findOrFail($id);
+        $formData = $request->all();
+        $this->validation($formData);
+
+
+        $comic->update($formData);
+
+        return redirect()->route('comics.show', ['comic' => $comic->id]);
+
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $comic = Comic::findOrFail($id);
+        $comic->delete();
+
+        return redirect()->route('comics.index');
+    }
+
+    private function validation($data) {
+        $validator = Validator::make (
+            $data,
             [
                 'title' => 'required|min:5|max:100',
                 'thumb' => 'required|min:10|max:150',
@@ -166,28 +228,9 @@ class ComicController extends Controller
                 'description.min' => "Il campo 'Descrizione' può rimanere vuoto o deve avere minimo 10 caratteri",
                 'description.max' => "Il campo 'Descrizione' può avere massimo 1000 caratteri",
             ]
-        );
+        )->validate();
 
-        $comic = Comic::findOrFail($id);
-        $formData = $request->all();
-
-        $comic->update($formData);
-
-        return redirect()->route('comics.show', ['comic' => $comic->id]);
-
+        return $validator;
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        $comic = Comic::findOrFail($id);
-        $comic->delete();
-
-        return redirect()->route('comics.index');
-    }
 }
