@@ -71,7 +71,7 @@
                         <textarea id="description" class="form-control" rows="5" name="description" value="{{ old('description') }}"></textarea>
                     </div>
 
-                     <!-- Error Description -->
+                    <!-- Error Description -->
                     @error('description')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
